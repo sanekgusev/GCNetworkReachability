@@ -36,18 +36,10 @@
 #   define GCNRLog(...) do {} while(0)
 #endif
 
-#if TARGET_OS_IPHONE
-#   if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-#       define GC_DISPATCH_RELEASE(v) do {} while(0)
-#   else
-#       define GC_DISPATCH_RELEASE(v) dispatch_release(v)
-#   endif
-#else
-#   if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
-#       define GC_DISPATCH_RELEASE(v) do {} while(0)
-#   else
-#       define GC_DISPATCH_RELEASE(v) dispatch_release(v)
-#   endif
+#if OS_OBJECT_USE_OBJC
+#   define GC_DISPATCH_RELEASE(v) do {} while(0)
+#else 
+#   define GC_DISPATCH_RELEASE(v) dispatch_release(v)
 #endif
 
 struct GCNetworkReachabilityFlagContext
